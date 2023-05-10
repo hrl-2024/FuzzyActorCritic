@@ -284,7 +284,7 @@ def ddpg(env_fn, hp: HyperParams=HyperParams(),actor_critic=core.mlp_actor_criti
             pi_bar = pi_network(obs1+noise)
             var_sum = sum(map(lambda v: tf.reduce_mean(tf.abs(v)**2.0),pi_network.trainable_variables))
             pi_weight_c = tf.stack([50.0/(50.0+var_sum)])**2.0
-            before_tanh_c = tf.stack([(20.0/(20.0+sum(pi_network.losses)))**2.0])
+            before_tanh_c = tf.stack([(20.0/(20.0+sum(pi_network.losses)))**1.0])
             # objective for regularizing the output of the nn as well as the weights
             # tf.print(pi_network.trainable_variables)
             # tf.print(pi_network.losses)
